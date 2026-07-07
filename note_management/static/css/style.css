@@ -1,0 +1,51 @@
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #2d3d58;
+}
+
+.navbar{
+    background-color: #4b5c7e;
+    color: white;
+    padding: 20px;
+}
+
+.navbar h1{
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.navbar button{
+    background-color: #071a2f;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+}
+
+.container{
+    display: flex;
+}
+
+.sidebar{
+    width: 220px;
+    background-color: #071a2f;
+    color: white;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+.sidebar h3{
+    margin-top: 0;
+}
+
+.sidebar p{
+    margin: 15px 0;
+}
+
+.content{
+    flex: 1;
+    padding: 30px;
+    background-color: white;
+}
+

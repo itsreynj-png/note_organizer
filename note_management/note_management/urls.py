@@ -23,3 +23,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', home),
 ]
+
+from notes.views import course_list
+
+urlpatterns=[
+    path("admin/", admin.site.urls),
+    path("",course_list,name="course_list"),
+]

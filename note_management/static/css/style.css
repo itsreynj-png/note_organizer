@@ -49,3 +49,46 @@ body{
     background-color: white;
 }
 
+.login_form{
+    width: 350;
+}
+
+.login_form p{
+    margin-top: 15px;
+}
+
+.login_form input{
+    width: 100%;
+    padding: 8px;
+}
+
+.login_form button{
+    margin-top: 20px;
+    background-color: #4b5c7e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.register_form{
+    width: 350px;
+}
+
+.register_form p{
+    margin-top: 15px;
+}
+
+.register_form input{
+    width: 100%;
+    padding: 8px;
+}
+
+.register_form button{
+    margin-top: 20px;
+    background-color: #4b5c7e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}

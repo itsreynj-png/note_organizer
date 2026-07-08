@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,8 +31,11 @@
         </div>
 
         <div class="content">
+            {% block content %}
             <h2>WELCOME</h2>
-            <p>Welcome to Academic Notec website.</p>
+            <p>Welcome to Academic Notes website.</p>
+            {% endblock  %}
+            
         </div>
 
     </div>

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from course.models import Course
+from notes.models import Course
 
 class Course(models.Model):
 

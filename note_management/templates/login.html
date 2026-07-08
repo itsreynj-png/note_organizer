@@ -3,19 +3,24 @@
 
 <h2>Login</h2>
 
-<form class="login-form">
+<form method="POST" class="login-form">
+    {% csrf_token %}
+
     <p>Username</p> 
-    <input type="text">
+    <input type="text" name="username">
 
     <p>Password</p>
-    <input type="password">
+    <input type="password" name="password">
 
-    <button>Login</button>
+    <button type="submit">Login</button>
 </form>
 
 <p class="register_text">
     Don't have an account?
-    <a href="#">Register</a>
+    <a href="{% url "register" %}">Register</a>
 </p>
+{% if error %}
+<p>{{ error }}</p>
+{% endif %}
 
 {% endblock  %}

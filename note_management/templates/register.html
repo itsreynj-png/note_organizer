@@ -3,25 +3,27 @@
 
 <h2>Register</h2>
 
-<form class="register-form">
+<form method="POST" class="register-form">
+    {% csrf_token %}
 
     <p>Username</p>
-    <input type="text">
+    <input type="text" name="username">
 
     <p>Email</p>
-    <input type="email">
+    <input type="email" name="email">
 
     <p>Password</p>
-    <input type="password">
+    <input type="password" name="password1">
 
     <p>Confirm Password</p>
-    <input type="password">
+    <input type="password" name="password2">
 
-    <button>Register</button>
+    <button type="submit">Register</button>
 </form>
 
 <p class="login_text">
     Already have an account?
-    <a href="#">Login</a>
+    <a href="{% url "login" %}">Login</a>
 </p>
+
 {% endblock %}

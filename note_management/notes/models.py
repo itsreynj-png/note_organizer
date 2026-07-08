@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from notes.models import Course
 
 class Course(models.Model):
 

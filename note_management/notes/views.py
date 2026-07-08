@@ -1,18 +1,14 @@
-from django.shortcuts import render
-from .models import Course
-
-def course_list(request):
-    courses = Course.objects.all()
-    return render(request,"course_list.html",{"courses": courses})
-def home(request):
-    return render(request, "base.html")
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from .models import Course
-from django.shortcuts import get_object_or_404
+
+from .models import Course, Note
+from .forms import NoteForm
+
+
+def home(request):
+    return render(request, "base.html")
 
 
 def register(request):
@@ -38,7 +34,7 @@ def login_view(request):
         user = authenticate(
             request=request,
             username=username,
-            password=password
+            password=password,
         )
 
         if user is not None:
@@ -55,50 +51,90 @@ def login_view(request):
 @login_required
 def course_list(request):
     courses = Course.objects.filter(user=request.user)
-    return render(request, "course_list.html", {"courses": courses})
+
+    return render(
+        request,
+        "course_list.html",
+        {"courses": courses},
+    )
 
 
+@login_required
 def note_create(request):
-        if request.mehtod =="POST":
-            form =NoteForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect("note_list")                
-        else:
-            form=NoreForm()
+    if request.method == "POST":
 
-        return render(request,"note_form.html",{"form":form},)
+        form = NoteForm(request.POST)
 
-def note_list(request):
-    notes=Note.objects.all()
-    return render(request,"notes_list.html",{"notes":notes},)
-
-
-def note_detail(request,pk):
-    note=get_object_or_404(Note,pk=pk)
-    return render(request,"note_detail.html",{"note":note})
-
-
-def note_update(request,pk):
-    note=get_object_or_404(Note,pk=pk)
-    
-    if request.mrthod=="POST":
-        form=NoteForm(request,POST,instance=note)
         if form.is_valid():
             form.save()
-            return render(request,"note_detail",pk=pk)
-        
+            return redirect("note_list")
+
     else:
-        form=NoteForm(instance=note)
 
-    return render(request,"note_form.html",{"form":form},)
+        form = NoteForm()
 
-def note_delete(request,pk):
-    note=get_object_or_404(Note,pk=pk)
+    return render(
+        request,
+        "note_form.html",
+        {"form": form},
+    )
 
-    if request.mrthod=="POST":
+
+@login_required
+def note_list(request):
+    notes = Note.objects.all()
+
+    return render(
+        request,
+        "note_list.html",
+        {"notes": notes},
+    )
+
+
+@login_required
+def note_detail(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+
+    return render(
+        request,
+        "note_detail.html",
+        {"note": note},
+    )
+
+
+@login_required
+def note_update(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+
+    if request.method == "POST":
+
+        form = NoteForm(request.POST, instance=note)
+
+        if form.is_valid():
+            form.save()
+            return redirect("note_detail", pk=pk)
+
+    else:
+
+        form = NoteForm(instance=note)
+
+    return render(
+        request,
+        "note_form.html",
+        {"form": form},
+    )
+
+
+@login_required
+def note_delete(request, pk):
+    note = get_object_or_404(Note, pk=pk)
+
+    if request.method == "POST":
         note.delete()
-        return render("note_list")
-    
-    return render(request,"note_confirm_delete.html",{"note":note},)
+        return redirect("note_list")
 
+    return render(
+        request,
+        "note_confirm_delete.html",
+        {"note": note},
+    )

@@ -18,6 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from notes.views import home
+from . import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -38,4 +39,14 @@ urlpatterns = [
     path("", views.course_list, name="home"),
     path("register/", views.register, name="register"),
     path("login/", views.login_view, name="login"),
+]
+
+
+
+urlpatterns = [
+    path("", views.note_list, name="note_list"),
+    path("create/", views.note_create, name="note_create"),
+    path("<int:pk>/", views.note_detail, name="note_detail"),
+    path("<int:pk>/edit/", views.note_update, name="note_update"),
+    path("<int:pk>/delete/", views.note_delete, name="note_delete"),
 ]

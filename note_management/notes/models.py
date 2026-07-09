@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class Course(models.Model):
 
-    titel=models.CharField(max_length=100)
+    title=models.CharField(max_length=100)
     description=models.TextField()
     created=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User,on_delete=models.CASCADE)

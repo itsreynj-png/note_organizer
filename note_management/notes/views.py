@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Course, Note
 from .forms import NoteForm
+from django.db.models import Q
+
 
 
 def home(request):
@@ -82,12 +84,18 @@ def note_create(request):
 
 @login_required
 def note_list(request):
-    notes = Note.objects.all()
+    query =request.GET.get("q")
+    notes = Note.objects.filter(course__user=request.user)
+
+    if query:
+        notes = notes.filter(Q(title__icontains=query)|Q(content__icontains=query))
+
 
     return render(
         request,
         "note_list.html",
-        {"notes": notes},
+        {"notes": notes,
+        "query":query},
     )
 
 

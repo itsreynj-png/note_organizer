@@ -63,7 +63,7 @@ class UserTest(TestCase):
         self.assertTrue(Course.objects.filter(user=user1,title="Math").exists())
 
 
-class courseModelTest(TestCase):
+class CourseModelTest(TestCase):
     def setUp(self):
         self.user=User.objects.create_user(
                 username="old user",

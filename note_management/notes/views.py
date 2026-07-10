@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from .models import Course, Note
-from .forms import NoteForm
+from .forms import NoteForm ,CourseForm
 from django.db.models import Q
 
 
@@ -51,12 +51,33 @@ def login_view(request):
     return render(request, "login.html")
 
 
+@login_required
+def course_create(request):
+    if request.method == "POST":
+
+        form =CourseForm(request.POST)
+
+        if form.is_valid():
+            course=form.save(commit=False)
+            course.user=request.user
+            course.save()
+            return redirect("course_list")
+
+    else:
+
+        form = CourseForm()
+
+    return render(
+        request,
+        "course_form.html",
+        {"form": form},
+    )
 
 
 @login_required
 def course_detail(request,pk):
-    course=get_object_or_404(Course,pk)
-    notes=Note_objects.filter(course=course)
+    course=get_object_or_404(Course,pk=pk)
+    notes = Note_objects.filter(course=course)
 
     return render(request,
                   "course_detail.html",
@@ -74,6 +95,45 @@ def course_list(request):
         "course_list.html",
         {"courses": courses},
     )
+
+
+@login_required
+def course_update(request,pk):
+    course = get_object_or_404(Course, pk=pk)
+
+    if request.method == "POST":
+
+        form = CourseForm(request.POST, instance=course)
+
+        if form.is_valid():
+            form.save()
+            return redirect("course_detail", pk=pk)
+
+    else:
+
+        form = CourseForm(instance=course)
+
+    return render(
+        request,
+        "course_form.html",
+        {"form": form},
+    )
+
+
+@login_required
+def course_delete(request,pk):
+    course = get_object_or_404(Course, pk=pk)
+
+    if request.method == "POST":
+        course.delete()
+        return redirect("course_list")
+
+    return render(
+        request,
+        "course_confirm_delete.html",
+        {"course": course},
+    )
+
 
 
 @login_required

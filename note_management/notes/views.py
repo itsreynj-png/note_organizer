@@ -9,6 +9,7 @@ from django.db.models import Q
 
 
 
+
 def home(request):
     return render(request, "base.html")
 
@@ -48,6 +49,20 @@ def login_view(request):
         })
 
     return render(request, "login.html")
+
+
+
+
+@login_required
+def course_detail(request,pk):
+    course=get_object_or_404(Course,pk)
+    notes=Note_objects.filter(course=course)
+
+    return render(request,
+                  "course_detail.html",
+                  {"course":course,
+                   "notes":notes},
+    )
 
 
 @login_required

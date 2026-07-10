@@ -80,6 +80,31 @@ class CourseModelTest(TestCase):
         self.assertEqual(course.description,"python course")
         self.assertEqual(course.user,self.user)
 
+    def test_update_course(self):
+        course=Course.objects.create(
+            title="python",
+            description="python course",
+            user=self.user
+        )
+
+        course.title="github"
+        course.description="github course"
+        course.save()
+
+        self.assertEqual(course.title,"github")
+        self.assertEqual(course.description,"github course")
+
+    def test_delete_course(self):
+        course=Course.objects.create(
+            title="python",
+            description="python course",
+            user=self.user
+        )
+
+        course.delete()
+
+        self.assertFalse(Course.objects.filter(id=course.id).exists())
+
 
 class NoteModelTest(TestCase):
     def setUp(self):
@@ -104,6 +129,47 @@ class NoteModelTest(TestCase):
         self.assertEqual(note.title,"note_management")
         self.assertEqual(note.content,"This project helps us manage our course notes")
         self.assertEqual(note.course,self.course)
+
+
+
+    def test_update_note(self):
+        note1=Note.objects.create(
+            title="note_management",
+            content="This project helps us manage our course notes",
+            course=self.course
+        )
+
+        note2=Note.objects.create(
+            title="Django",
+            content="Django workes here!",
+            course=self.course
+        )
+
+
+        note1.title="management"
+        note2.content="Welcome to Django"
+        note1.save()
+        note2.save()
+
+        self.assertEqual(note1.title,"management")
+        self.assertEqual(note2.content,"Welcome to Django")
+
+    def test_delete_note(self):
+        note1=Note.objects.create(
+            title="note_management",
+            content="This project helps us manage our course notes",
+            course=self.course
+        )
+
+        note2=Note.objects.create(
+            title="Django",
+            content="Django workes here!",
+            course=self.course
+        )
+
+        note2.delete()
+        self.assertTrue(Note.objects.filter(id=note1.id).exists())
+        self.assertFalse(Note.objects.filter(id=note2.id).exists())
 
 
 class NoteSearchTest(TestCase):

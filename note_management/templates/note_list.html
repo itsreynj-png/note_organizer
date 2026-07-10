@@ -3,8 +3,29 @@
 
 <h2>Course Notes</h2>
 
-<div class="note-list">
+<form class="search-form" method="GET">
+    <input 
+        type="text"
+        name="q"
+        value="{{ query }}"
+        placeholder="Search notes..." 
+        >
 
+    <button type="submit">
+        Search
+    </button>
+</form>
+
+<div class="note-list">
+    {% for note in notes %}
+    <div class="note-card">
+        {{ note.title }}
+    </div>
+    {% empty %} 
+    <p>Note not found.</p>
+    {% endfor %}
+</div>
+<!--
     <div class="note-card">
         Note 1
     </div>
@@ -22,7 +43,7 @@
     </div>
 
 </div>
-
+-->
 <button class="create-btn">
     Create Note
 </button>

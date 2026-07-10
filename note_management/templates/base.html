@@ -12,12 +12,17 @@
 
 <body>
     <div class="navbar">
-
         <h1>Academic Notes</h1>
-        <button>Home</button>
-        <button>Courses</button>
-        <button>Professors</button>
-        <button>Login</button>
+
+        <a href="{% url "home" %}">
+            <button>Home</button>
+        </a>
+        <a href="{% url "course_list" %}">
+            <button>Courses</button>
+        </a>
+        <a href="{% url "login" %}">
+            <button>Login</button>
+        </a>
     </div>
 
     <div class="container">
@@ -43,4 +48,3 @@
 </body>
 
 </html>
-

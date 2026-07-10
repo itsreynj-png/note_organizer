@@ -115,6 +115,22 @@ body{
     padding: 10px 20px;
 }
 
+/*search*/
+.search-form{
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+.search-form input{
+    width: 500px;
+    padding: 8px;
+}
+
+.search-form button{
+    padding: 8px 18px;
+}
+
 /*note create*/
 .note-form{
     width: 500px;

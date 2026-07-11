@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Note Details</h2>
+<div class="course-content">
+    <h2>{{ note.title }}</h2>
+    <p>{{ note.content }}</p>
+</div>
 
-<div class="note-content">
-    <h3>Note Title</h3>
-
-    <p>
-        The note content will be displayed here.
-    </p>
+<div class="note-buttons">
+    <a href="{% url "note_update" note.id %}">
+        <button class="action-btn">
+            Edit Note
+        </button>
+    </a>
+    <a href="{% url "note_delete" note.id %}">
+        <button class="action-btn">
+            Delete Note
+        </button>
+    </a>
+    <a href="{% url "course_detail" note.course.id %}">
+        <button class="action-btn">
+            Back to Notes
+        </button>
+    </a>
 
 </div>
 

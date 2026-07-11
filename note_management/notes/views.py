@@ -45,7 +45,7 @@ def login_view(request):
             return redirect("home")
 
         return render(request, "login.html", {
-            "error": "FALSE"
+            "error": "Invalid Username or Password"
         })
 
     return render(request, "login.html")
@@ -152,7 +152,7 @@ def note_create(request):
 
     return render(
         request,
-        "note_form.html",
+        "note_create.html",
         {"form": form},
     )
 

@@ -77,7 +77,7 @@ def course_create(request):
 @login_required
 def course_detail(request,pk):
     course=get_object_or_404(Course,pk=pk)
-    notes = Note_objects.filter(course=course)
+    notes = Note.objects.filter(course=course)
 
     return render(request,
                   "course_detail.html",
@@ -106,7 +106,9 @@ def course_update(request,pk):
         form = CourseForm(request.POST, instance=course)
 
         if form.is_valid():
-            form.save()
+            update_course=form.save(commit=False)
+            update_course.user=course.user
+            update_course.save()
             return redirect("course_detail", pk=pk)
 
     else:
@@ -137,13 +139,16 @@ def course_delete(request,pk):
 
 
 @login_required
-def note_create(request):
+def note_create(request,course_id):
+    course=get_object_or_404(Course,id=course_id)
     if request.method == "POST":
 
         form = NoteForm(request.POST)
 
         if form.is_valid():
-            form.save()
+            note=form.save(commit=False)
+            note.course=course
+            note.save()
             return redirect("note_list")
 
     else:
@@ -194,7 +199,9 @@ def note_update(request, pk):
         form = NoteForm(request.POST, instance=note)
 
         if form.is_valid():
-            form.save()
+            update_note=form.save(commit=False)
+            update_note.course=note.course
+            update_note.save()
             return redirect("note_detail", pk=pk)
 
     else:

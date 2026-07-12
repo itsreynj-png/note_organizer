@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="course-detail">
+    <h2>{{ course.title }}</h2>
+    <p>{{ course.description }}</p>
+</div>
+
+<div class="note-list">
+
+    {% for note in notes %}
+    <div class="note-card">
+        <a href="{% url 'note_detail' note.id %}">
+            <h3>{{ note.title }}</h3>
+        </a>
+    </div>
+    {% empty %}
+    <p>No notes yet.</p>
+    {% endfor %}
+</div>
+
+<div class="course-buttons">
+    <a href="{% url "note_create" %}">
+        <button class="action-btn">
+            Create Note
+        </button>
+    </a>
+
+    <a href="{% url "course_update" course.id %}">
+        <button class="action-btn">
+            Edit Course
+        </button>
+    </a>
+
+    <a href="{% url "course_delete" course.id %}">
+        <button class="action-btn">
+            Delete Course
+        </button>
+    </a>
+
+</div>
+{% endblock %}

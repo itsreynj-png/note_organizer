@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Create Note</h2>
+<h2>Edit Note</h2>
 
 <form method="POST" class="note-form">
     {% csrf_token %}
@@ -16,9 +16,8 @@
     {{ form.course }}
 
     <button type="submit" class="action-btn">
-        Create Notes
+        Save
     </button>
 
 </form>
-
 {% endblock %}

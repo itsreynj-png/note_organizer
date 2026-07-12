@@ -143,7 +143,7 @@ def note_create(request,course_id):
     course=get_object_or_404(Course,id=course_id)
     if request.method == "POST":
 
-        form = NoteForm(request.POST)
+        form = NoteForm(request.POST,request.FILES)
 
         if form.is_valid():
             note=form.save(commit=False)
@@ -196,7 +196,7 @@ def note_update(request, pk):
 
     if request.method == "POST":
 
-        form = NoteForm(request.POST, instance=note)
+        form = NoteForm(request.POST,request.FILES, instance=note)
 
         if form.is_valid():
             update_note=form.save(commit=False)

@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from notes import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -22,3 +24,6 @@ urlpatterns = [
     path("notes/<int:pk>/edit/", views.note_update, name="note_update"),
     path("notes/<int:pk>/delete/", views.note_delete, name="note_delete"),
 ]
+
+
+urlpatterns +=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

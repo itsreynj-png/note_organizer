@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
 
 from .models import Course, Note
@@ -78,6 +78,10 @@ def course_create(request):
 def course_detail(request,pk):
     course=get_object_or_404(Course,pk=pk)
     notes = Note.objects.filter(course=course)
+    query=request.GET.get("q","")
+
+    if query:
+        notes=notes.filter(Q(title__icontains=query)|Q(content__icontains=query))
 
     return render(request,
                   "course_detail.html",
@@ -164,7 +168,7 @@ def note_create(request,course_id):
 
 @login_required
 def note_list(request):
-    query =request.GET.get("q")
+    query =request.GET.get("q","")
     notes = Note.objects.filter(course__user=request.user)
 
     if query:
@@ -228,3 +232,8 @@ def note_delete(request, pk):
         "note_confirm_delete.html",
         {"note": note},
     )
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("home")

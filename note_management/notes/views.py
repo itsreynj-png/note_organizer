@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Course, Note
 from .forms import NoteForm ,CourseForm
 from django.db.models import Q
+from django.http import request
 
 
 
@@ -234,6 +235,6 @@ def note_delete(request, pk):
     )
 
 @login_required
-def logout(request):
+def logout_view(request):
     logout(request)
     return redirect("home")

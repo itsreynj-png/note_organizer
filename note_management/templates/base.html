@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +16,17 @@
         <a href="{% url "home" %}">
             <button>Home</button>
         </a>
+
         {% if user.is_authenticated %}
         <a href="{% url "course_list" %}">
             <button>My Courses</button>
         </a>
+        <a href="{% url "logout" %}">
+            <button>Logout</button>
+        </a>
         
         {% else %}
+
         <a href="{% url "login" %}">
             <button>Login</button>
         </a>
@@ -30,7 +34,6 @@
             <button>Register</button>
         </a>
         {% endif %}
-      
     </div>
 
     <div class="container">
@@ -38,7 +41,14 @@
         <div class="sidebar">
             <h3>Courses</h3>
             {% if user.is_authenticated %}
+            {%for course in sidebar_course%}
+            <a href="{% url "course_detail" course.id %}" class="sidebar-course">
+                {{ course.title }}
+            </a>
+            {% empty %}
             <p>Your courses will appear here.</p>
+            {% endfor %}
+            
             {% else %}
             <p>Pleas login first.</p>
             {% endif %}

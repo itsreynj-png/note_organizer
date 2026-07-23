@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
 
 <h2>Register</h2>
@@ -7,23 +7,26 @@
     {% csrf_token %}
 
     <p>Username</p>
-    <input type="text" name="username">
-
-    <p>Email</p>
-    <input type="email" name="email">
+    {{ form.username }}
 
     <p>Password</p>
-    <input type="password" name="password1">
+    {{ form.password1 }}
 
     <p>Confirm Password</p>
-    <input type="password" name="password2">
+    {{ form.password2 }}
 
-    <button type="submit">Register</button>
+    {% if form.errors %}
+        <div class="form-errors">
+            {{ form.errors }}
+        </div>
+    {% endif %}
+    <button type="submit" class="action-btn">
+        Register
+    </button>
+
 </form>
-
 <p class="login-text">
     Already have an account?
-    <a href="{% url "login" %}">Login</a>
+    <a href="{% url 'login' %}">Login</a>
 </p>
-
 {% endblock %}

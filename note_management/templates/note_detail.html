@@ -4,6 +4,15 @@
 <div class="course-content">
     <h2>{{ note.title }}</h2>
     <p>{{ note.content }}</p>
+
+    {% if note.file %}
+    <h3>Attached file</h3>
+    <a href="{{ note.file.url }}" target="_blank">
+        <button class="action-btn">
+            Open File
+        </button>
+    </a>
+    {% endif %}
 </div>
 
 <div class="note-buttons">

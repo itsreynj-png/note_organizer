@@ -1,0 +1,5 @@
+Temperature is a physical quantity that measures how hot or cold an object is. It is directly related to the average kinetic energy of the particles in a substance. As the particles move faster, the temperature increases; when they move more slowly, the temperature decreases.
+
+The most common temperature scales are Celsius (°C), Fahrenheit (°F), and Kelvin (K). In scientific work, the Kelvin scale is widely used because it begins at absolute zero, the lowest possible temperature.
+
+Temperature plays an important role in everyday life and in many scientific fields, including physics, chemistry, meteorology, engineering, and medicine. It affects the properties of materials, chemical reactions, and the transfer of heat between objects.

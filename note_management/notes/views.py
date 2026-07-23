@@ -234,6 +234,6 @@ def note_delete(request, pk):
     )
 
 @login_required
-def logout(request):
+def logout_view(request):
     logout(request)
     return redirect("home")

@@ -3,7 +3,7 @@
 
 <h2>Create Note</h2>
 
-<form method="POST" class="note-form">
+<form method="POST" enctype="multipart/form-data" class="note-form">
     {% csrf_token %}
 
     <p>Title</p>
@@ -12,8 +12,8 @@
     <p>Content</p>
     {{ form.content }}
 
-    <p>Course</p>
-    {{ form.course }}
+    <p>Upload File</p>
+    {{ form.file }}
 
     <button type="submit" class="action-btn">
         Create Notes
